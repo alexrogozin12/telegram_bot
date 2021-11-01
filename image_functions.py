@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 
 image_url = 'https://www.bing.com/images/search?q='
 
+
 def do_image_request_with_keywords(request_keywords):
     links = []
     print("request keywords", request_keywords)
@@ -25,17 +26,14 @@ def simplify_weather(complex_weather):
             return condition
     if 'overcast' in complex_weather:
         return 'cloudy'
-      
-    image_url = 'https://www.bing.com/images/search?q='
+
 
 def get_image_links(city_data):
     """
     find images for city and weather
     keywords = {'weather': 'weather-f}
     """
-#     print("I'm in images")
     weather = city_data['condition_english']
-#     print(weather)
     weather = simplify_weather(weather)
     print("simplified weather", weather)
         
@@ -45,7 +43,7 @@ def get_image_links(city_data):
     image_links = do_image_request_with_keywords(request_keywords)
 
     if len(image_links) == 0:
-        print("Shit! Such a rare request!")
+        print("Oh! Such a rare request!")
         image_links = do_image_request_with_keywords(city_data['slug'])
     if len(image_links) == 0:
         image_links.append('http://cs617424.vk.me/v617424318/68a0/GT6qv13kjz4.jpg')

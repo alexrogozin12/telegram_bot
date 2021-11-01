@@ -35,7 +35,7 @@ class SupaWeatherBot(object):
         with open('../data/translations.txt', 'r') as translations_file:
             self.translations = json.loads(translations_file.readline())
         self.days_of_week = {
-            'понедельник' : 0,
+            'понедельник': 0,
             'вторник': 1,
             'среда': 2,
             'четверг': 3,
@@ -147,7 +147,6 @@ class QueryHandler(object):
                 continue
 
             word = bot.morph.parse(word)[0].normal_form
-            # print(word, word in bot.days_of_week)
 
             if word in bot.days_of_week:
                 self.day_of_week = word
@@ -177,16 +176,13 @@ class QueryHandler(object):
 
     def day_of_week_to_date(self, day_of_week):
         if day_of_week is None:
-            # print('day of week unknown')
             return None
         now = datetime.date.today()
         now_weekday = now.weekday()
         needed_weekday = self.bot.days_of_week[day_of_week]
 
         delta_day = (needed_weekday - now_weekday) % 7
-        # print('delta = {}'.format(delta_day))
         date = now + datetime.timedelta(days=delta_day)
-        # print('day: {}'.format(self.date_to_string(date)))
         return date
 
     def reply(self):
@@ -207,7 +203,6 @@ class QueryHandler(object):
                                            .days_relative[self.day_relative])
         if self.date is None:
             self.date = datetime.date.today()
-        # print(self.date)
 
         url = 'https://api.weather.yandex.ru/v1/forecast?geoid={}&extra=true'.format(geoid)
         req = json.loads(requests.get(url, headers=self.bot.header).text)

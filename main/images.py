@@ -44,7 +44,6 @@ class ImageSender(object):
         if self.condition is None:
             return
         location = translit(self.handler.location, 'ru', reversed=True)
-        # info = '+'.join([self.location, self.condition])
         info = '+'.join([location, self.condition])
         print('info = {}'.format(info))
         url = ''.join([self.url_template, info, self.url_ending])
